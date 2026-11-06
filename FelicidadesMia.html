@@ -1,0 +1,877 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Una sorpresa para Mia 💗</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #66345f, #24132f 75%);
+    color: white;
+    font-family: Georgia, serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    padding: 20px;
+}
+
+#fireworks {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    bottom: -40px;
+    color: rgba(255, 180, 210, .45);
+    animation: float 10s linear infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0);
+        opacity: 0;
+    }
+    15% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 570px;
+    padding: 38px 25px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 28px;
+    background: rgba(255,255,255,.09);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 55px rgba(0,0,0,.35);
+}
+
+.small {
+    color: #ffc5df;
+    letter-spacing: 4px;
+    font-size: 11px;
+    margin-bottom: 18px;
+}
+
+h1 {
+    font-size: clamp(30px, 8vw, 44px);
+    font-weight: normal;
+    color: #ffe0ed;
+    margin-bottom: 12px;
+    text-shadow: 0 0 20px rgba(255,180,210,.3);
+}
+
+.subtitle {
+    color: #f8c8dc;
+    font-size: 16px;
+    font-style: italic;
+    margin-bottom: 28px;
+}
+
+button {
+    border: none;
+    padding: 14px 28px;
+    border-radius: 40px;
+    background: linear-gradient(135deg, #ffd0e2, #f477aa);
+    color: #45172f;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+    box-shadow: 0 5px 25px rgba(255,130,180,.3);
+    margin: 8px;
+}
+
+button:hover {
+    transform: scale(1.06);
+    box-shadow: 0 8px 30px rgba(255,130,180,.55);
+}
+
+#countdown {
+    display: none;
+    font-size: clamp(85px, 25vw, 130px);
+    font-weight: bold;
+    color: #ffe0ed;
+    text-shadow: 0 0 30px #ff79b5, 0 0 60px #ff4c9b;
+    animation: pulse .9s ease;
+    margin: 25px 0;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(.3);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#celebration {
+    display: none;
+    animation: appear 1.3s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* PASTEL */
+.cake-area {
+    margin: 28px auto 35px;
+    position: relative;
+    width: 210px;
+    height: 175px;
+}
+
+.cake {
+    position: absolute;
+    bottom: 0;
+    left: 25px;
+    width: 160px;
+    height: 85px;
+    background: linear-gradient(to bottom, #ffb6d0 0 25%, #d95c91 25% 100%);
+    border-radius: 12px 12px 18px 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.2);
+}
+
+.cake::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 0;
+    width: 100%;
+    height: 28px;
+    border-radius: 50%;
+    background: #ffe1ed;
+}
+
+.cake::after {
+    content: "♥   ♥   ♥";
+    position: absolute;
+    bottom: 17px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #ffe5ef;
+    font-size: 18px;
+}
+
+.plate {
+    position: absolute;
+    bottom: -8px;
+    left: 10px;
+    width: 190px;
+    height: 15px;
+    background: #fff0f6;
+    border-radius: 50%;
+}
+
+.candle {
+    position: absolute;
+    bottom: 85px;
+    left: 98px;
+    width: 13px;
+    height: 42px;
+    background: repeating-linear-gradient(
+        45deg,
+        #fff 0 6px,
+        #f477aa 6px 12px
+    );
+    border-radius: 4px;
+    z-index: 2;
+}
+
+.flame {
+    position: absolute;
+    width: 17px;
+    height: 25px;
+    top: -24px;
+    left: -2px;
+    background: radial-gradient(
+        ellipse at 50% 70%,
+        #fff8b0,
+        #ff9c35 65%,
+        transparent 70%
+    );
+    border-radius: 50% 50% 45% 45%;
+    animation: flicker .5s infinite alternate;
+    filter: drop-shadow(0 0 9px #ffbd55);
+}
+
+@keyframes flicker {
+    from {
+        transform: scale(.9) rotate(-5deg);
+    }
+    to {
+        transform: scale(1.1) rotate(5deg);
+    }
+}
+
+/* MENSAJE */
+.message-text {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #fff0f6;
+    margin-top: 22px;
+}
+
+.message-text p {
+    margin-bottom: 17px;
+}
+
+.signature {
+    color: #ffc5dc;
+    font-size: 19px;
+    font-style: italic;
+    margin-top: 23px;
+}
+
+.footer {
+    color: #e9b4ca;
+    letter-spacing: 3px;
+    font-size: 11px;
+    margin-top: 25px;
+}
+
+/* REPRODUCTOR */
+.music-player {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 25px auto 5px;
+    padding: 14px;
+    max-width: 380px;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 18px;
+    background: rgba(255,255,255,.10);
+    animation: appear 1s ease;
+}
+
+.music-player.hidden {
+    display: none !important;
+}
+
+#playBtn {
+    width: 43px;
+    height: 43px;
+    min-width: 43px;
+    padding: 0;
+    margin: 0;
+    border-radius: 50%;
+    font-size: 17px;
+}
+
+.track-info {
+    flex: 1;
+    text-align: left;
+    min-width: 0;
+}
+
+.track-name {
+    display: block;
+    font-size: 13px;
+    color: #ffe0ed;
+    margin-bottom: 9px;
+}
+
+.progress-wrap {
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,.25);
+    border-radius: 10px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: #ffb6d0;
+    border-radius: 10px;
+}
+
+.time-label {
+    font-size: 11px;
+    color: #f8c8dc;
+    margin-top: 6px;
+}
+
+#backButton {
+    display: none;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.4);
+    color: white;
+    margin-top: 25px;
+}
+
+@media(max-width: 420px) {
+    .container {
+        padding: 30px 18px;
+    }
+
+    .message-text {
+        font-size: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="fireworks"></canvas>
+<div class="hearts" id="hearts"></div>
+
+<div class="container">
+
+    <div class="small">
+        ❤️ UNA SORPRESA PARA TI CON MUCHO ❤️
+    </div>
+
+    <!-- INTRODUCCIÓN -->
+    <div id="intro">
+
+        <h1>✨ Feliz cumpleaños, Mia ✨</h1>
+
+        <div class="subtitle">
+            Hay días especiales... y hoy es uno de ellos.
+        </div>
+
+        <button type="button" onclick="startSurprise()">
+            Abrir Regalo 🎁
+        </button>
+
+    </div>
+
+    <!-- CUENTA REGRESIVA -->
+    <div id="countdown"></div>
+
+    <!-- CELEBRACIÓN -->
+    <div id="celebration">
+
+        <h1>🎂 ¡Feliz Cumpleaños, Mia! 🎂</h1>
+
+        <div class="subtitle">
+            Que comience tu día bonito... ✨
+        </div>
+
+        <div class="cake-area">
+            <div class="plate"></div>
+            <div class="cake"></div>
+            <div class="candle">
+                <div class="flame"></div>
+            </div>
+        </div>
+
+        <div class="message-text">
+
+            <p>
+                Hoy el mundo tiene una razón más para sonreír,
+                porque hace 20 años llegó alguien con una luz
+                bastante difícil de ignorar. ✨
+            </p>
+
+            <p>
+                Quizá todo comenzó con una simple coincidencia,
+                pero con el tiempo tus mensajes se convirtieron
+                en algo que me alegra el día.
+                Porque para mí no se trata solo de mantener una racha,
+                sino de tener una bonita excusa para saludarte,
+                saber de ti y sacarte una sonrisa de vez en cuando. 💗
+            </p>
+
+            <p>
+                Tienes una belleza que llama la atención,
+                pero hay algo en tu forma de ser que despierta
+                todavía más curiosidad por conocerte. 🌷
+            </p>
+
+            <p>
+                ¡Que hoy sobren las risas, los abrazos, el pastel
+                y las razones para celebrar! 🥂
+                Que tus 20 sean tan increíbles como tu sonrisa,
+                que nunca te falten motivos para brillar
+                y que hoy te consientan muchísimo, porque te lo mereces. 💗
+            </p>
+
+        </div>
+
+        <div class="signature">
+            Disfruta mucho tu día, Mia. 💗
+        </div>
+
+        <div class="footer">
+            CON CARIÑO, PARA TI ✨
+        </div>
+
+    </div>
+
+    <!-- AUDIO: COLOCA AQUI TU BASE64 ORIGINAL -->
+   <audio id="audio" loop playsinline preload="metadata">
+    <source src="Aprender_a_quererte.mp3" type="audio/mpeg">
+</audio>
+
+    <!-- REPRODUCTOR -->
+    <div class="music-player hidden" id="player">
+
+        <button id="playBtn" type="button" aria-label="Reproducir canción">
+            ▶
+        </button>
+
+        <div class="track-info">
+
+            <span class="track-name">
+                🎵 Aprender a quererte - Morat
+            </span>
+
+            <div class="progress-wrap" id="progressWrap">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="time-label" id="timeLabel">
+                0:00 / 0:00
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- VOLVER AL INICIO -->
+    <button id="backButton" type="button" onclick="goBack()">
+        🙈 Volver al inicio
+    </button>
+
+</div>
+
+<script>
+
+// =====================================
+// CORAZONES FLOTANTES
+// =====================================
+
+const hearts = document.getElementById("hearts");
+
+for (let i = 0; i < 24; i++) {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+    heart.innerHTML = "♥";
+    heart.style.left = Math.random() * 100 + "%";
+    heart.style.fontSize = (12 + Math.random() * 20) + "px";
+    heart.style.animationDelay = Math.random() * 9 + "s";
+    heart.style.animationDuration = (7 + Math.random() * 7) + "s";
+
+    hearts.appendChild(heart);
+}
+
+
+// =====================================
+// ELEMENTOS DEL AUDIO
+// =====================================
+
+const audio = document.getElementById("audio");
+const player = document.getElementById("player");
+const playBtn = document.getElementById("playBtn");
+const progressFill = document.getElementById("progressFill");
+const progressWrap = document.getElementById("progressWrap");
+const timeLabel = document.getElementById("timeLabel");
+
+
+// FORMATO DE TIEMPO
+
+function formatTime(seconds) {
+
+    if (!Number.isFinite(seconds)) {
+        return "0:00";
+    }
+
+    const min = Math.floor(seconds / 60);
+    const sec = Math.floor(seconds % 60);
+
+    return min + ":" + String(sec).padStart(2, "0");
+}
+
+
+// ACTUALIZAR BARRA Y TIEMPO
+
+function updateProgress() {
+
+    const duration = audio.duration || 0;
+    const current = audio.currentTime || 0;
+
+    const percentage = duration
+        ? (current / duration) * 100
+        : 0;
+
+    progressFill.style.width = percentage + "%";
+
+    timeLabel.textContent =
+        formatTime(current) + " / " + formatTime(duration);
+}
+
+
+// REPRODUCIR Y PAUSAR MANUALMENTE
+
+playBtn.addEventListener("click", async function() {
+
+    if (audio.paused) {
+
+        try {
+
+            await audio.play();
+
+        } catch (error) {
+
+            console.error("Error al reproducir:", error);
+
+            alert(
+                "No se pudo reproducir la canción. " +
+                "Verifica que hayas colocado correctamente el audio."
+            );
+
+        }
+
+    } else {
+
+        audio.pause();
+
+    }
+
+});
+
+audio.addEventListener("play", function() {
+    playBtn.textContent = "Ⅱ";
+});
+
+audio.addEventListener("pause", function() {
+    playBtn.textContent = "▶";
+});
+
+audio.addEventListener("ended", function() {
+    playBtn.textContent = "▶";
+});
+
+audio.addEventListener("loadedmetadata", updateProgress);
+audio.addEventListener("timeupdate", updateProgress);
+
+
+// AVANZAR O RETROCEDER EN LA CANCIÓN
+
+progressWrap.addEventListener("click", function(event) {
+
+    if (!Number.isFinite(audio.duration)) {
+        return;
+    }
+
+    const rect = progressWrap.getBoundingClientRect();
+
+    const position = (event.clientX - rect.left) / rect.width;
+
+    audio.currentTime =
+        Math.max(0, Math.min(1, position)) * audio.duration;
+
+});
+
+
+// =====================================
+// TEMPORIZADORES
+// =====================================
+
+let countdownTimer = null;
+let fireworksTimer = null;
+let countdownRunning = false;
+
+
+// =====================================
+// INICIAR SORPRESA
+// =====================================
+
+function startSurprise() {
+
+    if (countdownRunning) {
+        return;
+    }
+
+    countdownRunning = true;
+
+    const intro = document.getElementById("intro");
+    const countdown = document.getElementById("countdown");
+
+    intro.style.display = "none";
+
+    countdown.style.display = "block";
+
+    let number = 5;
+
+    countdown.innerText = number;
+
+    countdown.style.animation = "none";
+    void countdown.offsetWidth;
+    countdown.style.animation = "pulse .9s ease";
+
+    countdownTimer = setInterval(function() {
+
+        number--;
+
+        if (number > 0) {
+
+            countdown.innerText = number;
+
+            countdown.style.animation = "none";
+            void countdown.offsetWidth;
+            countdown.style.animation = "pulse .9s ease";
+
+        } else {
+
+            clearInterval(countdownTimer);
+
+            countdownTimer = null;
+
+            countdown.style.display = "none";
+
+            showCelebration();
+
+        }
+
+    }, 1000);
+
+}
+
+
+// =====================================
+// MOSTRAR CELEBRACIÓN
+// =====================================
+
+function showCelebration() {
+
+    document.getElementById("celebration").style.display = "block";
+
+    document.getElementById("backButton").style.display =
+        "inline-block";
+
+    player.classList.remove("hidden");
+
+    // NO HAY REPRODUCCIÓN AUTOMÁTICA.
+    // MIA DECIDE CUÁNDO PRESIONAR PLAY.
+
+    audio.pause();
+
+    try {
+        audio.currentTime = 0;
+    } catch (error) {
+        console.log("El audio todavía no está cargado.");
+    }
+
+    playBtn.textContent = "▶";
+
+    updateProgress();
+
+    launchFireworks();
+
+    fireworksTimer = setInterval(launchFireworks, 1500);
+
+}
+
+
+// =====================================
+// VOLVER AL INICIO
+// =====================================
+
+function goBack() {
+
+    clearInterval(countdownTimer);
+    clearInterval(fireworksTimer);
+
+    countdownTimer = null;
+    fireworksTimer = null;
+    countdownRunning = false;
+
+    document.getElementById("intro").style.display = "block";
+
+    document.getElementById("countdown").style.display = "none";
+
+    document.getElementById("celebration").style.display = "none";
+
+    document.getElementById("backButton").style.display = "none";
+
+    player.classList.add("hidden");
+
+    audio.pause();
+
+    try {
+        audio.currentTime = 0;
+    } catch (error) {
+        console.log("No se pudo reiniciar la posición del audio.");
+    }
+
+    playBtn.textContent = "▶";
+
+    progressFill.style.width = "0%";
+
+    clearFireworks();
+
+}
+
+
+// =====================================
+// FUEGOS ARTIFICIALES
+// =====================================
+
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+
+function resizeCanvas() {
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+}
+
+window.addEventListener("resize", resizeCanvas);
+
+resizeCanvas();
+
+
+function launchFireworks() {
+
+    const x = Math.random() * canvas.width;
+
+    const y = Math.random() * canvas.height * 0.55 + 30;
+
+    const colors = [
+        "#ff9ecb",
+        "#ffe59a",
+        "#ffffff",
+        "#c9a7ff",
+        "#ff70a6",
+        "#a8f0ff"
+    ];
+
+    const color = colors[
+        Math.floor(Math.random() * colors.length)
+    ];
+
+    for (let i = 0; i < 65; i++) {
+
+        const angle = Math.PI * 2 * i / 65;
+
+        const speed = Math.random() * 4 + 1.5;
+
+        particles.push({
+
+            x: x,
+            y: y,
+
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+
+            alpha: 1,
+
+            color: color,
+
+            size: Math.random() * 3 + 1
+
+        });
+
+    }
+
+}
+
+
+function animateFireworks() {
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(function(p) {
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        p.vy += 0.025;
+
+        p.alpha -= 0.012;
+
+        ctx.globalAlpha = Math.max(p.alpha, 0);
+
+        ctx.fillStyle = p.color;
+
+        ctx.beginPath();
+
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+
+        ctx.fill();
+
+    });
+
+    particles = particles.filter(function(p) {
+        return p.alpha > 0;
+    });
+
+    ctx.globalAlpha = 1;
+
+    requestAnimationFrame(animateFireworks);
+
+}
+
+
+function clearFireworks() {
+
+    particles = [];
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+}
+
+
+// INICIAR ANIMACIÓN DE FUEGOS
+
+animateFireworks();
+
+</script>
+
+</body>
+</html>
